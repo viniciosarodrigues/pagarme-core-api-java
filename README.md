@@ -1,0 +1,1 @@
+# pagarme-core-api-java
