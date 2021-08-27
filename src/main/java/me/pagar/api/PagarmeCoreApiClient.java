@@ -10,27 +10,19 @@ import me.pagar.api.http.client.HttpClient;
 
 public class PagarmeCoreApiClient {
     /**
-     * Singleton access to Subscriptions controller
-     * @return	Returns the SubscriptionsController instance 
-     */
-    public SubscriptionsController getSubscriptions() {
-        return SubscriptionsController.getInstance();
-    }
-
-    /**
-     * Singleton access to Orders controller
-     * @return	Returns the OrdersController instance 
-     */
-    public OrdersController getOrders() {
-        return OrdersController.getInstance();
-    }
-
-    /**
      * Singleton access to Plans controller
      * @return	Returns the PlansController instance 
      */
     public PlansController getPlans() {
         return PlansController.getInstance();
+    }
+
+    /**
+     * Singleton access to Subscriptions controller
+     * @return	Returns the SubscriptionsController instance 
+     */
+    public SubscriptionsController getSubscriptions() {
+        return SubscriptionsController.getInstance();
     }
 
     /**
@@ -42,11 +34,27 @@ public class PagarmeCoreApiClient {
     }
 
     /**
+     * Singleton access to Orders controller
+     * @return	Returns the OrdersController instance 
+     */
+    public OrdersController getOrders() {
+        return OrdersController.getInstance();
+    }
+
+    /**
      * Singleton access to Customers controller
      * @return	Returns the CustomersController instance 
      */
     public CustomersController getCustomers() {
         return CustomersController.getInstance();
+    }
+
+    /**
+     * Singleton access to Recipients controller
+     * @return	Returns the RecipientsController instance 
+     */
+    public RecipientsController getRecipients() {
+        return RecipientsController.getInstance();
     }
 
     /**
@@ -58,11 +66,11 @@ public class PagarmeCoreApiClient {
     }
 
     /**
-     * Singleton access to Recipients controller
-     * @return	Returns the RecipientsController instance 
+     * Singleton access to Transfers controller
+     * @return	Returns the TransfersController instance 
      */
-    public RecipientsController getRecipients() {
-        return RecipientsController.getInstance();
+    public TransfersController getTransfers() {
+        return TransfersController.getInstance();
     }
 
     /**
@@ -87,14 +95,6 @@ public class PagarmeCoreApiClient {
      */
     public TransactionsController getTransactions() {
         return TransactionsController.getInstance();
-    }
-
-    /**
-     * Singleton access to Transfers controller
-     * @return	Returns the TransfersController instance 
-     */
-    public TransfersController getTransfers() {
-        return TransfersController.getInstance();
     }
 
     /**

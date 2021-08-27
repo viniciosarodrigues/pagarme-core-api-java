@@ -138,6 +138,14 @@ public class GetBankAccountResponseBuilder {
         getBankAccountResponse.setMetadata(metadata);
         return this;
     }
+
+    /**
+     * Pix Key
+     */
+    public GetBankAccountResponseBuilder pixKey(String pixKey) {
+        getBankAccountResponse.setPixKey(pixKey);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

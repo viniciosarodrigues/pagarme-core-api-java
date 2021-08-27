@@ -81,6 +81,22 @@ public class CreateRecipientRequestBuilder {
         createRecipientRequest.setTransferSettings(transferSettings);
         return this;
     }
+
+    /**
+     * Recipient code
+     */
+    public CreateRecipientRequestBuilder code(String code) {
+        createRecipientRequest.setCode(code);
+        return this;
+    }
+
+    /**
+     * Payment mode
+     */
+    public CreateRecipientRequestBuilder paymentMode(String paymentMode) {
+        createRecipientRequest.setPaymentMode(paymentMode);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

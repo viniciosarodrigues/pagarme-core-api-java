@@ -14,10 +14,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class GetBalanceResponse 
         implements java.io.Serializable {
-    private static final long serialVersionUID = -8317337111181157482L;
+    private static final long serialVersionUID = -6047727524308375522L;
     private String currency;
-    private int availableAmount;
+    private long availableAmount;
     private GetRecipientResponse recipient;
+    private long transferredAmount;
+    private long waitingFundsAmount;
     /** GETTER
      * Currency
      */
@@ -38,7 +40,7 @@ public class GetBalanceResponse
      * Amount available for transferring
      */
     @JsonGetter("available_amount")
-    public int getAvailableAmount ( ) { 
+    public long getAvailableAmount ( ) { 
         return this.availableAmount;
     }
     
@@ -46,7 +48,7 @@ public class GetBalanceResponse
      * Amount available for transferring
      */
     @JsonSetter("available_amount")
-    public void setAvailableAmount (int value) { 
+    public void setAvailableAmount (long value) { 
         this.availableAmount = value;
     }
  
@@ -64,6 +66,38 @@ public class GetBalanceResponse
     @JsonSetter("recipient")
     public void setRecipient (GetRecipientResponse value) { 
         this.recipient = value;
+    }
+ 
+    /** GETTER
+     * TODO: Write general description for this method
+     */
+    @JsonGetter("transferred_amount")
+    public long getTransferredAmount ( ) { 
+        return this.transferredAmount;
+    }
+    
+    /** SETTER
+     * TODO: Write general description for this method
+     */
+    @JsonSetter("transferred_amount")
+    public void setTransferredAmount (long value) { 
+        this.transferredAmount = value;
+    }
+ 
+    /** GETTER
+     * TODO: Write general description for this method
+     */
+    @JsonGetter("waiting_funds_amount")
+    public long getWaitingFundsAmount ( ) { 
+        return this.waitingFundsAmount;
+    }
+    
+    /** SETTER
+     * TODO: Write general description for this method
+     */
+    @JsonSetter("waiting_funds_amount")
+    public void setWaitingFundsAmount (long value) { 
+        this.waitingFundsAmount = value;
     }
  
 }

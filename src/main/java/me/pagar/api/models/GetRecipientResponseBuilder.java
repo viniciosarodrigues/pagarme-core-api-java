@@ -132,6 +132,22 @@ public class GetRecipientResponseBuilder {
         getRecipientResponse.setTransferSettings(transferSettings);
         return this;
     }
+
+    /**
+     * Recipient code
+     */
+    public GetRecipientResponseBuilder code(String code) {
+        getRecipientResponse.setCode(code);
+        return this;
+    }
+
+    /**
+     * Payment mode
+     */
+    public GetRecipientResponseBuilder paymentMode(String paymentMode) {
+        getRecipientResponse.setPaymentMode(paymentMode);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

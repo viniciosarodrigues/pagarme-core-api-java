@@ -14,8 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class UpdateRecipientBankAccountRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 31519766495789438L;
+    private static final long serialVersionUID = -5624721660606133302L;
     private CreateBankAccountRequest bankAccount;
+    private String paymentMode = "bank_transfer";
     /** GETTER
      * Bank account
      */
@@ -30,6 +31,22 @@ public class UpdateRecipientBankAccountRequest
     @JsonSetter("bank_account")
     public void setBankAccount (CreateBankAccountRequest value) { 
         this.bankAccount = value;
+    }
+ 
+    /** GETTER
+     * Payment mode
+     */
+    @JsonGetter("payment_mode")
+    public String getPaymentMode ( ) { 
+        return this.paymentMode;
+    }
+    
+    /** SETTER
+     * Payment mode
+     */
+    @JsonSetter("payment_mode")
+    public void setPaymentMode (String value) { 
+        this.paymentMode = value;
     }
  
 }

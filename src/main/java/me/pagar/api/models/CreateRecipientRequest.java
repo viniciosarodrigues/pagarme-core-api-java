@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class CreateRecipientRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 4790427122429893435L;
+    private static final long serialVersionUID = -7808458358315985803L;
     private String name;
     private String email;
     private String description;
@@ -23,6 +23,8 @@ public class CreateRecipientRequest
     private CreateBankAccountRequest defaultBankAccount;
     private LinkedHashMap<String, String> metadata;
     private CreateTransferSettingsRequest transferSettings;
+    private String code;
+    private String paymentMode = "bank_transfer";
     /** GETTER
      * Recipient name
      */
@@ -149,6 +151,38 @@ public class CreateRecipientRequest
     @JsonSetter("transfer_settings")
     public void setTransferSettings (CreateTransferSettingsRequest value) { 
         this.transferSettings = value;
+    }
+ 
+    /** GETTER
+     * Recipient code
+     */
+    @JsonGetter("code")
+    public String getCode ( ) { 
+        return this.code;
+    }
+    
+    /** SETTER
+     * Recipient code
+     */
+    @JsonSetter("code")
+    public void setCode (String value) { 
+        this.code = value;
+    }
+ 
+    /** GETTER
+     * Payment mode
+     */
+    @JsonGetter("payment_mode")
+    public String getPaymentMode ( ) { 
+        return this.paymentMode;
+    }
+    
+    /** SETTER
+     * Payment mode
+     */
+    @JsonSetter("payment_mode")
+    public void setPaymentMode (String value) { 
+        this.paymentMode = value;
     }
  
 }

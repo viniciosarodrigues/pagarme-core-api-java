@@ -29,7 +29,7 @@ public class GetBalanceResponseBuilder {
     /**
      * Amount available for transferring
      */
-    public GetBalanceResponseBuilder availableAmount(int availableAmount) {
+    public GetBalanceResponseBuilder availableAmount(long availableAmount) {
         getBalanceResponse.setAvailableAmount(availableAmount);
         return this;
     }
@@ -39,6 +39,16 @@ public class GetBalanceResponseBuilder {
      */
     public GetBalanceResponseBuilder recipient(GetRecipientResponse recipient) {
         getBalanceResponse.setRecipient(recipient);
+        return this;
+    }
+
+    public GetBalanceResponseBuilder transferredAmount(long transferredAmount) {
+        getBalanceResponse.setTransferredAmount(transferredAmount);
+        return this;
+    }
+
+    public GetBalanceResponseBuilder waitingFundsAmount(long waitingFundsAmount) {
+        getBalanceResponse.setWaitingFundsAmount(waitingFundsAmount);
         return this;
     }
     /**

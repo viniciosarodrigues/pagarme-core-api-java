@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class CreateBankAccountRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 1510708238311605325L;
+    private static final long serialVersionUID = 9088972334527653794L;
     private String holderName;
     private String holderType;
     private String holderDocument;
@@ -25,6 +25,7 @@ public class CreateBankAccountRequest
     private String accountCheckDigit;
     private String type;
     private LinkedHashMap<String, String> metadata;
+    private String pixKey;
     /** GETTER
      * Bank account holder name
      */
@@ -183,6 +184,22 @@ public class CreateBankAccountRequest
     @JsonSetter("metadata")
     public void setMetadata (LinkedHashMap<String, String> value) { 
         this.metadata = value;
+    }
+ 
+    /** GETTER
+     * Pix key
+     */
+    @JsonGetter("pix_key")
+    public String getPixKey ( ) { 
+        return this.pixKey;
+    }
+    
+    /** SETTER
+     * Pix key
+     */
+    @JsonSetter("pix_key")
+    public void setPixKey (String value) { 
+        this.pixKey = value;
     }
  
 }

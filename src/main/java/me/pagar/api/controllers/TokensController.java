@@ -43,129 +43,6 @@ public class TokensController extends BaseController {
     }
 
     /**
-     * Gets a token from its id
-     * @param    id    Required parameter: Token id
-     * @param    publicKey    Required parameter: Public key
-     * @return    Returns the GetTokenResponse response from the API call 
-     */
-    public GetTokenResponse getToken(
-                final String id,
-                final String publicKey
-    ) throws Throwable {
-
-        HttpRequest _request = _buildGetTokenRequest(id, publicKey);
-        HttpResponse _response = getClientInstance().executeAsString(_request);
-        HttpContext _context = new HttpContext(_request, _response);
-
-        return _handleGetTokenResponse(_context);
-    }
-
-    /**
-     * Gets a token from its id
-     * @param    id    Required parameter: Token id
-     * @param    publicKey    Required parameter: Public key
-     */
-    public void getTokenAsync(
-                final String id,
-                final String publicKey,
-                final APICallBack<GetTokenResponse> callBack
-    ) {
-        Runnable _responseTask = new Runnable() {
-            public void run() {
-
-                HttpRequest _request;
-                try {
-                    _request = _buildGetTokenRequest(id, publicKey);
-                } catch (Exception e) {
-                    callBack.onFailure(null, e);
-                    return;
-                }
-
-                // Invoke request and get response
-                getClientInstance().executeAsStringAsync(_request, new APICallBack<HttpResponse>() {
-                    public void onSuccess(HttpContext _context, HttpResponse _response) {
-                        try {
-                            GetTokenResponse returnValue = _handleGetTokenResponse(_context);
-                            callBack.onSuccess(_context, returnValue);
-                        } catch (Exception e) {
-                            callBack.onFailure(_context, e);
-                        }
-                    }
-
-                    public void onFailure(HttpContext _context, Throwable _exception) {
-                        // Let the caller know of the failure
-                        callBack.onFailure(_context, _exception);
-                    }
-                });
-            }
-        };
-
-        // Execute async using thread pool
-        APIHelper.getScheduler().execute(_responseTask);
-    }
-
-    /**
-     * Builds the HttpRequest object for getToken
-     */
-    private HttpRequest _buildGetTokenRequest(
-                final String id,
-                final String publicKey) throws IOException, APIException {
-        //the base uri for api requests
-        String _baseUri = Configuration.baseUri;
-
-        //prepare query string for API call
-        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/tokens/{id}?appId={public_key}");
-
-        //process template parameters
-        Map<String, Object> _templateParameters = new HashMap<String, Object>();
-        _templateParameters.put("id", id);
-        _templateParameters.put("public_key", publicKey);
-        APIHelper.appendUrlWithTemplateParameters(_queryBuilder, _templateParameters);
-        //validate and preprocess url
-        String _queryUrl = APIHelper.cleanUrl(_queryBuilder);
-
-        //load all headers for the outgoing API request
-        Map<String, String> _headers = new HashMap<String, String>();
-        _headers.put("user-agent", BaseController.userAgent);
-        _headers.put("accept", "application/json");
-
-
-        //prepare and invoke the API call request to fetch the response
-        HttpRequest _request = getClientInstance().get(_queryUrl, _headers, null);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallBack() != null) {
-            getHttpCallBack().OnBeforeRequest(_request);
-        }
-
-        return _request;
-    }
-
-    /**
-     * Processes the response for getToken
-     * @return An object of type GetTokenResponse
-     */
-    private GetTokenResponse _handleGetTokenResponse(HttpContext _context)
-            throws APIException, IOException {
-        HttpResponse _response = _context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallBack() != null) {
-            getHttpCallBack().OnAfterResponse(_context);
-        }
-
-        //handle errors defined at the API level
-        validateResponse(_response, _context);
-
-        //extract result from the http response
-        String _responseBody = ((HttpStringResponse)_response).getBody();
-        GetTokenResponse _result = APIHelper.deserialize(_responseBody,
-                                                        new TypeReference<GetTokenResponse>(){});
-
-        return _result;
-    }
-
-    /**
      * TODO: type endpoint description here
      * @param    publicKey    Required parameter: Public key
      * @param    request    Required parameter: Request for creating a token
@@ -277,6 +154,129 @@ public class TokensController extends BaseController {
      * @return An object of type GetTokenResponse
      */
     private GetTokenResponse _handleCreateTokenResponse(HttpContext _context)
+            throws APIException, IOException {
+        HttpResponse _response = _context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallBack() != null) {
+            getHttpCallBack().OnAfterResponse(_context);
+        }
+
+        //handle errors defined at the API level
+        validateResponse(_response, _context);
+
+        //extract result from the http response
+        String _responseBody = ((HttpStringResponse)_response).getBody();
+        GetTokenResponse _result = APIHelper.deserialize(_responseBody,
+                                                        new TypeReference<GetTokenResponse>(){});
+
+        return _result;
+    }
+
+    /**
+     * Gets a token from its id
+     * @param    id    Required parameter: Token id
+     * @param    publicKey    Required parameter: Public key
+     * @return    Returns the GetTokenResponse response from the API call 
+     */
+    public GetTokenResponse getToken(
+                final String id,
+                final String publicKey
+    ) throws Throwable {
+
+        HttpRequest _request = _buildGetTokenRequest(id, publicKey);
+        HttpResponse _response = getClientInstance().executeAsString(_request);
+        HttpContext _context = new HttpContext(_request, _response);
+
+        return _handleGetTokenResponse(_context);
+    }
+
+    /**
+     * Gets a token from its id
+     * @param    id    Required parameter: Token id
+     * @param    publicKey    Required parameter: Public key
+     */
+    public void getTokenAsync(
+                final String id,
+                final String publicKey,
+                final APICallBack<GetTokenResponse> callBack
+    ) {
+        Runnable _responseTask = new Runnable() {
+            public void run() {
+
+                HttpRequest _request;
+                try {
+                    _request = _buildGetTokenRequest(id, publicKey);
+                } catch (Exception e) {
+                    callBack.onFailure(null, e);
+                    return;
+                }
+
+                // Invoke request and get response
+                getClientInstance().executeAsStringAsync(_request, new APICallBack<HttpResponse>() {
+                    public void onSuccess(HttpContext _context, HttpResponse _response) {
+                        try {
+                            GetTokenResponse returnValue = _handleGetTokenResponse(_context);
+                            callBack.onSuccess(_context, returnValue);
+                        } catch (Exception e) {
+                            callBack.onFailure(_context, e);
+                        }
+                    }
+
+                    public void onFailure(HttpContext _context, Throwable _exception) {
+                        // Let the caller know of the failure
+                        callBack.onFailure(_context, _exception);
+                    }
+                });
+            }
+        };
+
+        // Execute async using thread pool
+        APIHelper.getScheduler().execute(_responseTask);
+    }
+
+    /**
+     * Builds the HttpRequest object for getToken
+     */
+    private HttpRequest _buildGetTokenRequest(
+                final String id,
+                final String publicKey) throws IOException, APIException {
+        //the base uri for api requests
+        String _baseUri = Configuration.baseUri;
+
+        //prepare query string for API call
+        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/tokens/{id}?appId={public_key}");
+
+        //process template parameters
+        Map<String, Object> _templateParameters = new HashMap<String, Object>();
+        _templateParameters.put("id", id);
+        _templateParameters.put("public_key", publicKey);
+        APIHelper.appendUrlWithTemplateParameters(_queryBuilder, _templateParameters);
+        //validate and preprocess url
+        String _queryUrl = APIHelper.cleanUrl(_queryBuilder);
+
+        //load all headers for the outgoing API request
+        Map<String, String> _headers = new HashMap<String, String>();
+        _headers.put("user-agent", BaseController.userAgent);
+        _headers.put("accept", "application/json");
+
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest _request = getClientInstance().get(_queryUrl, _headers, null);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallBack() != null) {
+            getHttpCallBack().OnBeforeRequest(_request);
+        }
+
+        return _request;
+    }
+
+    /**
+     * Processes the response for getToken
+     * @return An object of type GetTokenResponse
+     */
+    private GetTokenResponse _handleGetTokenResponse(HttpContext _context)
             throws APIException, IOException {
         HttpResponse _response = _context.getResponse();
 

@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 @JsonInclude(Include.ALWAYS)
 public class GetRecipientResponse 
         implements java.io.Serializable {
-    private static final long serialVersionUID = -231221123519874838L;
+    private static final long serialVersionUID = -6991273281546934244L;
     private String id;
     private String name;
     private String email;
@@ -34,6 +34,8 @@ public class GetRecipientResponse
     private LinkedHashMap<String, String> metadata;
     private GetAutomaticAnticipationResponse automaticAnticipationSettings;
     private GetTransferSettingsResponse transferSettings;
+    private String code;
+    private String paymentMode = "bank_transfer";
     /** GETTER
      * Id
      */
@@ -278,6 +280,38 @@ public class GetRecipientResponse
     @JsonSetter("transfer_settings")
     public void setTransferSettings (GetTransferSettingsResponse value) { 
         this.transferSettings = value;
+    }
+ 
+    /** GETTER
+     * Recipient code
+     */
+    @JsonGetter("code")
+    public String getCode ( ) { 
+        return this.code;
+    }
+    
+    /** SETTER
+     * Recipient code
+     */
+    @JsonSetter("code")
+    public void setCode (String value) { 
+        this.code = value;
+    }
+ 
+    /** GETTER
+     * Payment mode
+     */
+    @JsonGetter("payment_mode")
+    public String getPaymentMode ( ) { 
+        return this.paymentMode;
+    }
+    
+    /** SETTER
+     * Payment mode
+     */
+    @JsonSetter("payment_mode")
+    public void setPaymentMode (String value) { 
+        this.paymentMode = value;
     }
  
 }

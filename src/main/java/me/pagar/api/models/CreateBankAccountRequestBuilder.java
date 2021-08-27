@@ -97,6 +97,14 @@ public class CreateBankAccountRequestBuilder {
         createBankAccountRequest.setMetadata(metadata);
         return this;
     }
+
+    /**
+     * Pix key
+     */
+    public CreateBankAccountRequestBuilder pixKey(String pixKey) {
+        createBankAccountRequest.setPixKey(pixKey);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

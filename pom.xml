@@ -9,7 +9,7 @@
 
   <groupId>PagarmeCoreApiLib</groupId>
   <artifactId>pagarme-core-api-lib</artifactId>
-  <version>1.0.0-beta</version>
+  <version>5.0.0</version>
   <packaging>jar</packaging>
 
   <name>PagarmeCoreApiLib</name>

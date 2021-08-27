@@ -25,6 +25,14 @@ public class UpdateRecipientBankAccountRequestBuilder {
         updateRecipientBankAccountRequest.setBankAccount(bankAccount);
         return this;
     }
+
+    /**
+     * Payment mode
+     */
+    public UpdateRecipientBankAccountRequestBuilder paymentMode(String paymentMode) {
+        updateRecipientBankAccountRequest.setPaymentMode(paymentMode);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */
