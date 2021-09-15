@@ -215,6 +215,14 @@ public class GetCheckoutPaymentResponseBuilder {
         getCheckoutPaymentResponse.setBankTransfer(bankTransfer);
         return this;
     }
+
+    /**
+     * Accepted Brands
+     */
+    public GetCheckoutPaymentResponseBuilder acceptedBrands(List<String> acceptedBrands) {
+        getCheckoutPaymentResponse.setAcceptedBrands(acceptedBrands);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

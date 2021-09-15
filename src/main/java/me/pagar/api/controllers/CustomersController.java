@@ -451,39 +451,43 @@ public class CustomersController extends BaseController {
     }
 
     /**
-     * Creates a new customer
-     * @param    request    Required parameter: Request for creating a customer
+     * Creates a access token for a customer
+     * @param    customerId    Required parameter: Customer Id
+     * @param    request    Required parameter: Request for creating a access token
      * @param    idempotencyKey    Optional parameter: Example: 
-     * @return    Returns the GetCustomerResponse response from the API call 
+     * @return    Returns the GetAccessTokenResponse response from the API call 
      */
-    public GetCustomerResponse createCustomer(
-                final CreateCustomerRequest request,
+    public GetAccessTokenResponse createAccessToken(
+                final String customerId,
+                final CreateAccessTokenRequest request,
                 final String idempotencyKey
     ) throws Throwable {
 
-        HttpRequest _request = _buildCreateCustomerRequest(request, idempotencyKey);
+        HttpRequest _request = _buildCreateAccessTokenRequest(customerId, request, idempotencyKey);
         HttpResponse _response = getClientInstance().executeAsString(_request);
         HttpContext _context = new HttpContext(_request, _response);
 
-        return _handleCreateCustomerResponse(_context);
+        return _handleCreateAccessTokenResponse(_context);
     }
 
     /**
-     * Creates a new customer
-     * @param    request    Required parameter: Request for creating a customer
+     * Creates a access token for a customer
+     * @param    customerId    Required parameter: Customer Id
+     * @param    request    Required parameter: Request for creating a access token
      * @param    idempotencyKey    Optional parameter: Example: 
      */
-    public void createCustomerAsync(
-                final CreateCustomerRequest request,
+    public void createAccessTokenAsync(
+                final String customerId,
+                final CreateAccessTokenRequest request,
                 final String idempotencyKey,
-                final APICallBack<GetCustomerResponse> callBack
+                final APICallBack<GetAccessTokenResponse> callBack
     ) {
         Runnable _responseTask = new Runnable() {
             public void run() {
 
                 HttpRequest _request;
                 try {
-                    _request = _buildCreateCustomerRequest(request, idempotencyKey);
+                    _request = _buildCreateAccessTokenRequest(customerId, request, idempotencyKey);
                 } catch (Exception e) {
                     callBack.onFailure(null, e);
                     return;
@@ -493,7 +497,7 @@ public class CustomersController extends BaseController {
                 getClientInstance().executeAsStringAsync(_request, new APICallBack<HttpResponse>() {
                     public void onSuccess(HttpContext _context, HttpResponse _response) {
                         try {
-                            GetCustomerResponse returnValue = _handleCreateCustomerResponse(_context);
+                            GetAccessTokenResponse returnValue = _handleCreateAccessTokenResponse(_context);
                             callBack.onSuccess(_context, returnValue);
                         } catch (Exception e) {
                             callBack.onFailure(_context, e);
@@ -513,16 +517,22 @@ public class CustomersController extends BaseController {
     }
 
     /**
-     * Builds the HttpRequest object for createCustomer
+     * Builds the HttpRequest object for createAccessToken
      */
-    private HttpRequest _buildCreateCustomerRequest(
-                final CreateCustomerRequest request,
+    private HttpRequest _buildCreateAccessTokenRequest(
+                final String customerId,
+                final CreateAccessTokenRequest request,
                 final String idempotencyKey) throws IOException, APIException {
         //the base uri for api requests
         String _baseUri = Configuration.baseUri;
 
         //prepare query string for API call
-        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/customers");
+        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/customers/{customer_id}/access-tokens");
+
+        //process template parameters
+        Map<String, Object> _templateParameters = new HashMap<String, Object>();
+        _templateParameters.put("customer_id", customerId);
+        APIHelper.appendUrlWithTemplateParameters(_queryBuilder, _templateParameters);
         //validate and preprocess url
         String _queryUrl = APIHelper.cleanUrl(_queryBuilder);
 
@@ -549,10 +559,10 @@ public class CustomersController extends BaseController {
     }
 
     /**
-     * Processes the response for createCustomer
-     * @return An object of type GetCustomerResponse
+     * Processes the response for createAccessToken
+     * @return An object of type GetAccessTokenResponse
      */
-    private GetCustomerResponse _handleCreateCustomerResponse(HttpContext _context)
+    private GetAccessTokenResponse _handleCreateAccessTokenResponse(HttpContext _context)
             throws APIException, IOException {
         HttpResponse _response = _context.getResponse();
 
@@ -566,8 +576,8 @@ public class CustomersController extends BaseController {
 
         //extract result from the http response
         String _responseBody = ((HttpStringResponse)_response).getBody();
-        GetCustomerResponse _result = APIHelper.deserialize(_responseBody,
-                                                        new TypeReference<GetCustomerResponse>(){});
+        GetAccessTokenResponse _result = APIHelper.deserialize(_responseBody,
+                                                        new TypeReference<GetAccessTokenResponse>(){});
 
         return _result;
     }
@@ -700,6 +710,128 @@ public class CustomersController extends BaseController {
         String _responseBody = ((HttpStringResponse)_response).getBody();
         GetAddressResponse _result = APIHelper.deserialize(_responseBody,
                                                         new TypeReference<GetAddressResponse>(){});
+
+        return _result;
+    }
+
+    /**
+     * Creates a new customer
+     * @param    request    Required parameter: Request for creating a customer
+     * @param    idempotencyKey    Optional parameter: Example: 
+     * @return    Returns the GetCustomerResponse response from the API call 
+     */
+    public GetCustomerResponse createCustomer(
+                final CreateCustomerRequest request,
+                final String idempotencyKey
+    ) throws Throwable {
+
+        HttpRequest _request = _buildCreateCustomerRequest(request, idempotencyKey);
+        HttpResponse _response = getClientInstance().executeAsString(_request);
+        HttpContext _context = new HttpContext(_request, _response);
+
+        return _handleCreateCustomerResponse(_context);
+    }
+
+    /**
+     * Creates a new customer
+     * @param    request    Required parameter: Request for creating a customer
+     * @param    idempotencyKey    Optional parameter: Example: 
+     */
+    public void createCustomerAsync(
+                final CreateCustomerRequest request,
+                final String idempotencyKey,
+                final APICallBack<GetCustomerResponse> callBack
+    ) {
+        Runnable _responseTask = new Runnable() {
+            public void run() {
+
+                HttpRequest _request;
+                try {
+                    _request = _buildCreateCustomerRequest(request, idempotencyKey);
+                } catch (Exception e) {
+                    callBack.onFailure(null, e);
+                    return;
+                }
+
+                // Invoke request and get response
+                getClientInstance().executeAsStringAsync(_request, new APICallBack<HttpResponse>() {
+                    public void onSuccess(HttpContext _context, HttpResponse _response) {
+                        try {
+                            GetCustomerResponse returnValue = _handleCreateCustomerResponse(_context);
+                            callBack.onSuccess(_context, returnValue);
+                        } catch (Exception e) {
+                            callBack.onFailure(_context, e);
+                        }
+                    }
+
+                    public void onFailure(HttpContext _context, Throwable _exception) {
+                        // Let the caller know of the failure
+                        callBack.onFailure(_context, _exception);
+                    }
+                });
+            }
+        };
+
+        // Execute async using thread pool
+        APIHelper.getScheduler().execute(_responseTask);
+    }
+
+    /**
+     * Builds the HttpRequest object for createCustomer
+     */
+    private HttpRequest _buildCreateCustomerRequest(
+                final CreateCustomerRequest request,
+                final String idempotencyKey) throws IOException, APIException {
+        //the base uri for api requests
+        String _baseUri = Configuration.baseUri;
+
+        //prepare query string for API call
+        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/customers");
+        //validate and preprocess url
+        String _queryUrl = APIHelper.cleanUrl(_queryBuilder);
+
+        //load all headers for the outgoing API request
+        Map<String, String> _headers = new HashMap<String, String>();
+        if (idempotencyKey != null) {
+            _headers.put("idempotency-key", idempotencyKey);
+        }
+        _headers.put("user-agent", BaseController.userAgent);
+        _headers.put("accept", "application/json");
+        _headers.put("content-type", "application/json");
+
+
+        //prepare and invoke the API call request to fetch the response
+        HttpRequest _request = getClientInstance().postBody(_queryUrl, _headers, APIHelper.serialize(request),
+                Configuration.basicAuthUserName, Configuration.basicAuthPassword);
+
+        // Invoke the callback before request if its not null
+        if (getHttpCallBack() != null) {
+            getHttpCallBack().OnBeforeRequest(_request);
+        }
+
+        return _request;
+    }
+
+    /**
+     * Processes the response for createCustomer
+     * @return An object of type GetCustomerResponse
+     */
+    private GetCustomerResponse _handleCreateCustomerResponse(HttpContext _context)
+            throws APIException, IOException {
+        HttpResponse _response = _context.getResponse();
+
+        //invoke the callback after response if its not null
+        if (getHttpCallBack() != null) {
+            getHttpCallBack().OnAfterResponse(_context);
+        }
+
+        //handle errors defined at the API level
+        validateResponse(_response, _context);
+
+        //extract result from the http response
+        String _responseBody = ((HttpStringResponse)_response).getBody();
+        GetCustomerResponse _result = APIHelper.deserialize(_responseBody,
+                                                        new TypeReference<GetCustomerResponse>(){});
 
         return _result;
     }
@@ -1498,138 +1630,6 @@ public class CustomersController extends BaseController {
         String _responseBody = ((HttpStringResponse)_response).getBody();
         GetCustomerResponse _result = APIHelper.deserialize(_responseBody,
                                                         new TypeReference<GetCustomerResponse>(){});
-
-        return _result;
-    }
-
-    /**
-     * Creates a access token for a customer
-     * @param    customerId    Required parameter: Customer Id
-     * @param    request    Required parameter: Request for creating a access token
-     * @param    idempotencyKey    Optional parameter: Example: 
-     * @return    Returns the GetAccessTokenResponse response from the API call 
-     */
-    public GetAccessTokenResponse createAccessToken(
-                final String customerId,
-                final CreateAccessTokenRequest request,
-                final String idempotencyKey
-    ) throws Throwable {
-
-        HttpRequest _request = _buildCreateAccessTokenRequest(customerId, request, idempotencyKey);
-        HttpResponse _response = getClientInstance().executeAsString(_request);
-        HttpContext _context = new HttpContext(_request, _response);
-
-        return _handleCreateAccessTokenResponse(_context);
-    }
-
-    /**
-     * Creates a access token for a customer
-     * @param    customerId    Required parameter: Customer Id
-     * @param    request    Required parameter: Request for creating a access token
-     * @param    idempotencyKey    Optional parameter: Example: 
-     */
-    public void createAccessTokenAsync(
-                final String customerId,
-                final CreateAccessTokenRequest request,
-                final String idempotencyKey,
-                final APICallBack<GetAccessTokenResponse> callBack
-    ) {
-        Runnable _responseTask = new Runnable() {
-            public void run() {
-
-                HttpRequest _request;
-                try {
-                    _request = _buildCreateAccessTokenRequest(customerId, request, idempotencyKey);
-                } catch (Exception e) {
-                    callBack.onFailure(null, e);
-                    return;
-                }
-
-                // Invoke request and get response
-                getClientInstance().executeAsStringAsync(_request, new APICallBack<HttpResponse>() {
-                    public void onSuccess(HttpContext _context, HttpResponse _response) {
-                        try {
-                            GetAccessTokenResponse returnValue = _handleCreateAccessTokenResponse(_context);
-                            callBack.onSuccess(_context, returnValue);
-                        } catch (Exception e) {
-                            callBack.onFailure(_context, e);
-                        }
-                    }
-
-                    public void onFailure(HttpContext _context, Throwable _exception) {
-                        // Let the caller know of the failure
-                        callBack.onFailure(_context, _exception);
-                    }
-                });
-            }
-        };
-
-        // Execute async using thread pool
-        APIHelper.getScheduler().execute(_responseTask);
-    }
-
-    /**
-     * Builds the HttpRequest object for createAccessToken
-     */
-    private HttpRequest _buildCreateAccessTokenRequest(
-                final String customerId,
-                final CreateAccessTokenRequest request,
-                final String idempotencyKey) throws IOException, APIException {
-        //the base uri for api requests
-        String _baseUri = Configuration.baseUri;
-
-        //prepare query string for API call
-        StringBuilder _queryBuilder = new StringBuilder(_baseUri + "/customers/{customer_id}/access-tokens");
-
-        //process template parameters
-        Map<String, Object> _templateParameters = new HashMap<String, Object>();
-        _templateParameters.put("customer_id", customerId);
-        APIHelper.appendUrlWithTemplateParameters(_queryBuilder, _templateParameters);
-        //validate and preprocess url
-        String _queryUrl = APIHelper.cleanUrl(_queryBuilder);
-
-        //load all headers for the outgoing API request
-        Map<String, String> _headers = new HashMap<String, String>();
-        if (idempotencyKey != null) {
-            _headers.put("idempotency-key", idempotencyKey);
-        }
-        _headers.put("user-agent", BaseController.userAgent);
-        _headers.put("accept", "application/json");
-        _headers.put("content-type", "application/json");
-
-
-        //prepare and invoke the API call request to fetch the response
-        HttpRequest _request = getClientInstance().postBody(_queryUrl, _headers, APIHelper.serialize(request),
-                Configuration.basicAuthUserName, Configuration.basicAuthPassword);
-
-        // Invoke the callback before request if its not null
-        if (getHttpCallBack() != null) {
-            getHttpCallBack().OnBeforeRequest(_request);
-        }
-
-        return _request;
-    }
-
-    /**
-     * Processes the response for createAccessToken
-     * @return An object of type GetAccessTokenResponse
-     */
-    private GetAccessTokenResponse _handleCreateAccessTokenResponse(HttpContext _context)
-            throws APIException, IOException {
-        HttpResponse _response = _context.getResponse();
-
-        //invoke the callback after response if its not null
-        if (getHttpCallBack() != null) {
-            getHttpCallBack().OnAfterResponse(_context);
-        }
-
-        //handle errors defined at the API level
-        validateResponse(_response, _context);
-
-        //extract result from the http response
-        String _responseBody = ((HttpStringResponse)_response).getBody();
-        GetAccessTokenResponse _result = APIHelper.deserialize(_responseBody,
-                                                        new TypeReference<GetAccessTokenResponse>(){});
 
         return _result;
     }

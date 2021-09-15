@@ -129,6 +129,14 @@ public class CreateCheckoutPaymentRequestBuilder {
         createCheckoutPaymentRequest.setBankTransfer(bankTransfer);
         return this;
     }
+
+    /**
+     * Accepted Brands
+     */
+    public CreateCheckoutPaymentRequestBuilder acceptedBrands(List<String> acceptedBrands) {
+        createCheckoutPaymentRequest.setAcceptedBrands(acceptedBrands);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

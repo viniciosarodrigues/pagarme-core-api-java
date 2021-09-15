@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class CreateCheckoutPaymentRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 2339210014952537440L;
+    private static final long serialVersionUID = 3924188913375222570L;
     private List<String> acceptedPaymentMethods;
     private List<Object> acceptedMultiPaymentMethods;
     private String successUrl;
@@ -29,6 +29,7 @@ public class CreateCheckoutPaymentRequest
     private boolean billingAddressEditable;
     private CreateAddressRequest billingAddress;
     private CreateCheckoutBankTransferRequest bankTransfer;
+    private List<String> acceptedBrands;
     /** GETTER
      * Accepted Payment Methods
      */
@@ -251,6 +252,22 @@ public class CreateCheckoutPaymentRequest
     @JsonSetter("bank_transfer")
     public void setBankTransfer (CreateCheckoutBankTransferRequest value) { 
         this.bankTransfer = value;
+    }
+ 
+    /** GETTER
+     * Accepted Brands
+     */
+    @JsonGetter("accepted_brands")
+    public List<String> getAcceptedBrands ( ) { 
+        return this.acceptedBrands;
+    }
+    
+    /** SETTER
+     * Accepted Brands
+     */
+    @JsonSetter("accepted_brands")
+    public void setAcceptedBrands (List<String> value) { 
+        this.acceptedBrands = value;
     }
  
 }
