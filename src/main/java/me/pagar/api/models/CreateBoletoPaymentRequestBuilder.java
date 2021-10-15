@@ -82,6 +82,14 @@ public class CreateBoletoPaymentRequestBuilder {
         createBoletoPaymentRequest.setDocumentNumber(documentNumber);
         return this;
     }
+
+    /**
+     * Soft Descriptor
+     */
+    public CreateBoletoPaymentRequestBuilder statementDescriptor(String statementDescriptor) {
+        createBoletoPaymentRequest.setStatementDescriptor(statementDescriptor);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

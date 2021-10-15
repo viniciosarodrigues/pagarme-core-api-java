@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 @JsonInclude(Include.ALWAYS)
 public class CreateBoletoPaymentRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = -2646176696593960312L;
+    private static final long serialVersionUID = 1173789506515223715L;
     private int retries;
     private String bank;
     private String instructions;
@@ -27,6 +27,7 @@ public class CreateBoletoPaymentRequest
     private String billingAddressId;
     private String nossoNumero;
     private String documentNumber;
+    private String statementDescriptor;
     /** GETTER
      * Number of retries
      */
@@ -155,6 +156,22 @@ public class CreateBoletoPaymentRequest
     @JsonSetter("document_number")
     public void setDocumentNumber (String value) { 
         this.documentNumber = value;
+    }
+ 
+    /** GETTER
+     * Soft Descriptor
+     */
+    @JsonGetter("statement_descriptor")
+    public String getStatementDescriptor ( ) { 
+        return this.statementDescriptor;
+    }
+    
+    /** SETTER
+     * Soft Descriptor
+     */
+    @JsonSetter("statement_descriptor")
+    public void setStatementDescriptor (String value) { 
+        this.statementDescriptor = value;
     }
  
 }

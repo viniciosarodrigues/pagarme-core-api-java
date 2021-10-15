@@ -99,6 +99,14 @@ public class GetBoletoTransactionResponseBuilder
         getBoletoTransactionResponse.setCreditAt(creditAt);
         return this;
     }
+
+    /**
+     * Soft Descriptor
+     */
+    public GetBoletoTransactionResponseBuilder statementDescriptor(String statementDescriptor) {
+        getBoletoTransactionResponse.setStatementDescriptor(statementDescriptor);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

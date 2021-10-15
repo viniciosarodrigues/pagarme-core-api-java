@@ -19,7 +19,7 @@ public abstract class BaseController {
      */
     private static HttpClient clientInstance = null;
     private static final Object syncObject = new Object();
-    protected static final String userAgent = "PagarmeCoreApi - Java 5.0.2";
+    protected static final String userAgent = "PagarmeCoreApi - Java 5.1.0";
 
     /**
      * Protected variable to keep reference of httpCallBack instance if user provides any
