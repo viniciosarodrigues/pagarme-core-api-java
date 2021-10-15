@@ -96,7 +96,7 @@ public class UpdateAutomaticAnticipationSettingsRequest
      * TODO: Write general description for this method
      */
     @JsonSetter("days")
-    private void setDays (Integer value) { 
+    public void setDays (Integer value) { 
         this.days = value;
     }
  

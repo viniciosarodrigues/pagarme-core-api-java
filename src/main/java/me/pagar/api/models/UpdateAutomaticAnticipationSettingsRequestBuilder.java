@@ -37,6 +37,11 @@ public class UpdateAutomaticAnticipationSettingsRequestBuilder {
         updateAutomaticAnticipationSettingsRequest.setDelay(delay);
         return this;
     }
+
+    public UpdateAutomaticAnticipationSettingsRequestBuilder days(Integer days) {
+        updateAutomaticAnticipationSettingsRequest.setDays(days);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.ALWAYS)
 public class CreateCheckoutPaymentRequest 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 3924188913375222570L;
+    private static final long serialVersionUID = -5055144782779123059L;
     private List<String> acceptedPaymentMethods;
     private List<Object> acceptedMultiPaymentMethods;
     private String successUrl;
@@ -30,6 +30,7 @@ public class CreateCheckoutPaymentRequest
     private CreateAddressRequest billingAddress;
     private CreateCheckoutBankTransferRequest bankTransfer;
     private List<String> acceptedBrands;
+    private CreateCheckoutPixPaymentRequest pix;
     /** GETTER
      * Accepted Payment Methods
      */
@@ -268,6 +269,22 @@ public class CreateCheckoutPaymentRequest
     @JsonSetter("accepted_brands")
     public void setAcceptedBrands (List<String> value) { 
         this.acceptedBrands = value;
+    }
+ 
+    /** GETTER
+     * Pix payment request
+     */
+    @JsonGetter("pix")
+    public CreateCheckoutPixPaymentRequest getPix ( ) { 
+        return this.pix;
+    }
+    
+    /** SETTER
+     * Pix payment request
+     */
+    @JsonSetter("pix")
+    public void setPix (CreateCheckoutPixPaymentRequest value) { 
+        this.pix = value;
     }
  
 }

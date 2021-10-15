@@ -223,6 +223,14 @@ public class GetCheckoutPaymentResponseBuilder {
         getCheckoutPaymentResponse.setAcceptedBrands(acceptedBrands);
         return this;
     }
+
+    /**
+     * Pix payment response
+     */
+    public GetCheckoutPaymentResponseBuilder pix(GetCheckoutPixPaymentResponse pix) {
+        getCheckoutPaymentResponse.setPix(pix);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */

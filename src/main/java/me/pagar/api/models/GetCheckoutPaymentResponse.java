@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 @JsonInclude(Include.ALWAYS)
 public class GetCheckoutPaymentResponse 
         implements java.io.Serializable {
-    private static final long serialVersionUID = 4985686597734183068L;
+    private static final long serialVersionUID = 5325069576856335867L;
     private String id;
     private Integer amount;
     private String defaultPaymentMethod;
@@ -45,6 +45,7 @@ public class GetCheckoutPaymentResponse
     private GetCheckoutDebitCardPaymentResponse debitCard;
     private GetCheckoutBankTransferPaymentResponse bankTransfer;
     private List<String> acceptedBrands;
+    private GetCheckoutPixPaymentResponse pix;
     /** GETTER
      * TODO: Write general description for this method
      */
@@ -469,6 +470,22 @@ public class GetCheckoutPaymentResponse
     @JsonSetter("accepted_brands")
     public void setAcceptedBrands (List<String> value) { 
         this.acceptedBrands = value;
+    }
+ 
+    /** GETTER
+     * Pix payment response
+     */
+    @JsonGetter("pix")
+    public GetCheckoutPixPaymentResponse getPix ( ) { 
+        return this.pix;
+    }
+    
+    /** SETTER
+     * Pix payment response
+     */
+    @JsonSetter("pix")
+    public void setPix (GetCheckoutPixPaymentResponse value) { 
+        this.pix = value;
     }
  
 }

@@ -137,6 +137,14 @@ public class CreateCheckoutPaymentRequestBuilder {
         createCheckoutPaymentRequest.setAcceptedBrands(acceptedBrands);
         return this;
     }
+
+    /**
+     * Pix payment request
+     */
+    public CreateCheckoutPaymentRequestBuilder pix(CreateCheckoutPixPaymentRequest pix) {
+        createCheckoutPaymentRequest.setPix(pix);
+        return this;
+    }
     /**
      * Build the instance with the given values
      */
